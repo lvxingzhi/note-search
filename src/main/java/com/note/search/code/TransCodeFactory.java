@@ -1,6 +1,9 @@
 package com.note.search.code;
 
-import com.note.search.consts.SearchConst;
+import com.note.search.chain.TransCodeAscii2NativeChain;
+import com.note.search.chain.TransCodeBaseChain;
+import com.note.search.chain.TransCodeNative2AsciiChain;
+import com.note.search.request.CodeResp;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +24,7 @@ import java.util.Map;
  */
 public class TransCodeFactory {
 
-    private Map<String,String> codeMap = new HashMap<>();
+    private Map<String,TransCodeBaseChain> codeMap = new HashMap<>();
 
     private static TransCodeFactory transCodeFactory;
 
@@ -32,12 +35,23 @@ public class TransCodeFactory {
     public static TransCodeFactory getInstance(){
 
         if(transCodeFactory==null){
-            Map<String,String> map = new HashMap<>();
-            map.put(SearchConst.CodeType.ASCII2NATIVE.getType(),"");
+            Map<String,TransCodeBaseChain> map = new HashMap<>();
+            TransCodeAscii2NativeChain transCodeAscii2NativeChain = new TransCodeAscii2NativeChain();
+            TransCodeNative2AsciiChain transCodeNative2AsciiChain = new TransCodeNative2AsciiChain();
+            map.put(transCodeAscii2NativeChain.getCodeType(),transCodeAscii2NativeChain);
+            map.put(transCodeNative2AsciiChain.getCodeType(),transCodeNative2AsciiChain);
             transCodeFactory = new TransCodeFactory();
         }
 
         return transCodeFactory;
+    }
+
+    public CodeResp trans(String type,String content){
+        TransCodeBaseChain chain = codeMap.get(type);
+        if(chain!=null){
+            return chain.execute(content);
+        }
+        return null;
     }
 
 }

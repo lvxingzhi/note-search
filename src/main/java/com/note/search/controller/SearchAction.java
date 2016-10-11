@@ -1,5 +1,6 @@
 package com.note.search.controller;
 
+import com.note.search.code.TransCodeFactory;
 import com.note.search.request.CodeReq;
 import com.note.search.util.Native2AsciiUtils;
 import org.springframework.stereotype.Controller;
@@ -29,7 +30,7 @@ public class SearchAction {
         String type = codeReq.getType();
         String content = codeReq.getContent();
 
-
+        TransCodeFactory.getInstance().;
 
         return "main";
     }

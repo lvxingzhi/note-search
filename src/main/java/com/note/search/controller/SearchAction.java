@@ -2,6 +2,7 @@ package com.note.search.controller;
 
 import com.note.search.code.TransCodeFactory;
 import com.note.search.request.CodeReq;
+import com.note.search.request.CodeResp;
 import com.note.search.util.Native2AsciiUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,13 +27,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SearchAction {
 
     @RequestMapping("/transcoding")
-    public String transcoding(CodeReq codeReq,Model model){
+    public String transcoding(CodeReq codeReq, Model model){
+
         String type = codeReq.getType();
         String content = codeReq.getContent();
+        CodeResp codeResp = TransCodeFactory.getInstance().trans(type,content);
 
-        TransCodeFactory.getInstance().;
-
-        return "main";
+        model.addAttribute("codeResp",codeResp);
+        model.addAttribute("aa","asdf");
+        return "transcode/main";
     }
 
 

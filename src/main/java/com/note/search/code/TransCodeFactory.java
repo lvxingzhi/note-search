@@ -3,7 +3,10 @@ package com.note.search.code;
 import com.note.search.chain.TransCodeAscii2NativeChain;
 import com.note.search.chain.TransCodeBaseChain;
 import com.note.search.chain.TransCodeNative2AsciiChain;
+import com.note.search.exception.SystemException;
 import com.note.search.request.CodeResp;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +26,7 @@ import java.util.Map;
  * @since 1.0
  */
 public class TransCodeFactory {
-
+    protected static final Logger logger = LoggerFactory.getLogger(TransCodeFactory.class);
     private Map<String,TransCodeBaseChain> codeMap = new HashMap<>();
 
     private static TransCodeFactory transCodeFactory;
@@ -33,7 +36,6 @@ public class TransCodeFactory {
     }
 
     public static TransCodeFactory getInstance(){
-
         if(transCodeFactory==null){
             Map<String,TransCodeBaseChain> map = new HashMap<>();
             TransCodeAscii2NativeChain transCodeAscii2NativeChain = new TransCodeAscii2NativeChain();
@@ -43,15 +45,27 @@ public class TransCodeFactory {
             transCodeFactory = new TransCodeFactory();
         }
 
+        if(transCodeFactory==null){
+            logger.error("TransCodeFactory is null");
+            throw new SystemException("TransCodeFactory can not be null, create init is error");
+        }
+
         return transCodeFactory;
     }
 
     public CodeResp trans(String type,String content){
         TransCodeBaseChain chain = codeMap.get(type);
-        if(chain!=null){
-            return chain.execute(content);
+        if(type==null){
+            return null;
         }
-        return null;
+        if(content==null){
+            return null;
+        }
+        if(chain==null){
+            return null;
+        }
+        return chain.execute(content);
+
     }
 
 }

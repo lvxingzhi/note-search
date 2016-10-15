@@ -20,8 +20,8 @@ public class SearchConst {
      *
      */
     public enum CodeType {
-        NATIVE2ASCII("native2ascii", "本地转ASCII"),
-        ASCII2NATIVE("native2ascii", "ASCII转本地");
+        NATIVE2ASCII("10001", "本地转ASCII"),
+        ASCII2NATIVE("10002", "ASCII转本地");
 
         private String type;
         private String message;

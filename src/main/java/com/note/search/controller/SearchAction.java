@@ -34,9 +34,14 @@ public class SearchAction {
         CodeResp codeResp = TransCodeFactory.getInstance().trans(type,content);
 
         model.addAttribute("codeResp",codeResp);
-        model.addAttribute("aa","asdf");
+        return "transcode/show";
+    }
+
+    @RequestMapping("/main")
+    public String main(Model model){
         return "transcode/main";
     }
+
 
 
 

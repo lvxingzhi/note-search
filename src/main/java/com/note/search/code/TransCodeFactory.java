@@ -43,6 +43,7 @@ public class TransCodeFactory {
             map.put(transCodeAscii2NativeChain.getCodeType(),transCodeAscii2NativeChain);
             map.put(transCodeNative2AsciiChain.getCodeType(),transCodeNative2AsciiChain);
             transCodeFactory = new TransCodeFactory();
+            transCodeFactory.setCodeMap(map);
         }
 
         if(transCodeFactory==null){
@@ -68,4 +69,7 @@ public class TransCodeFactory {
 
     }
 
+    private void setCodeMap(Map<String, TransCodeBaseChain> codeMap) {
+        this.codeMap = codeMap;
+    }
 }

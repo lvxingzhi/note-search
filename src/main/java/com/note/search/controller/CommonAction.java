@@ -27,4 +27,9 @@ public class CommonAction {
         return "common/index";
     }
 
+    @RequestMapping("/bootstrap/main")
+    public String bootstrapMain(CodeReq codeReq, Model model){
+        return "bootstrap/main";
+    }
+
 }

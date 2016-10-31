@@ -55,18 +55,7 @@ Transcoding.CnCode2EnCode = function (str) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
 
 var GB2312UnicodeConverter = typeof(GB2312UnicodeConverter) != "undefined" ? GB2312UnicodeConverter : {};

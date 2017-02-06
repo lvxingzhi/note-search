@@ -4,7 +4,7 @@
     <title>Title</title>
 </head>
 <body>
-    main page${requestScope.aa}
+    main 中文 page${requestScope.aa}
     <%=request.getAttribute("aa") %>
 
     <form action="/search/transcoding" method="post">
